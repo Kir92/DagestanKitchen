@@ -1,0 +1,32 @@
+/* not-found.module.css */
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+
+.alert {
+  background-color: rgb(139, 185, 223);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(27, 16, 75, 0.1);
+}
+
+.alertHeading {
+  color:black;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.alertText {
+  color: rgb(28, 28, 34);
+  margin-bottom: 2rem;
+}
+
+.customButton {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+
+}
