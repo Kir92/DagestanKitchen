@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation";
 import RegistrationModal from "../modals/registration.modal";
 import LoginModal from "../modals/login.modal";
 import { useState } from "react";
+import { signOutFunc } from "@/actions/sign-out";
 
 // Компонент логотипа
 export const Logo = () => {
@@ -34,6 +35,10 @@ export default function Header() {
 
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  const handleSignOut = async () => {
+    await signOutFunc();
+  };
 
   // Функция для генерации элементов навигации
   const getNavItems = () => {
@@ -77,9 +82,9 @@ export default function Header() {
             color="secondary"
             href="#"
             variant="flat"
-            onPress={() => setIsLoginOpen(true)}
+            onPress={handleSignOut}
           >
-            Логин
+            Выйти
           </Button>
         </NavbarItem>
         <NavbarItem>
