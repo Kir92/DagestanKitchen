@@ -82,6 +82,17 @@ export default function Header() {
             color="secondary"
             href="#"
             variant="flat"
+            onPress={() => setIsLoginOpen(true)}
+          >
+            Логин
+          </Button>
+        </NavbarItem>
+        <NavbarItem className="hidden lg:flex">
+          <Button
+            as={Link}
+            color="secondary"
+            href="#"
+            variant="flat"
             onPress={handleSignOut}
           >
             Выйти

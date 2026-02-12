@@ -12,7 +12,7 @@ const RegistrationForm = ({ onClose }: IProps) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "", ///////////////////////////////////////////Определяем состояние для параметров ввода данных
-    confirmpassword: "",
+    confirmPassword: "",
   });
 
   const validateEmail = (email: string) => {
@@ -73,13 +73,13 @@ const RegistrationForm = ({ onClose }: IProps) => {
         name="ConfirmPassword"
         placeholder="Подтвердите пароль"
         type="password"
-        value={formData.confirmpassword} ////////////////////////////////////////////////////////Форма подтверждения  пароля
+        value={formData.confirmPassword} ////////////////////////////////////////////////////////Форма подтверждения  пароля
         classNames={{
           inputWrapper: "bg-default-100",
           input: "text-sm focus: outline none",
         }}
         onChange={(e) =>
-          setFormData({ ...formData, confirmpassword: e.target.value })
+          setFormData({ ...formData, confirmPassword: e.target.value })
         }
         validate={(value) => {
           if (!value) return "Пароль для подтверждения обязателен!";
@@ -87,7 +87,7 @@ const RegistrationForm = ({ onClose }: IProps) => {
           return null;
         }}
       />
-      <div className="flex flex w-[100%] gap-4 items-center pt-8 justify-end">
+      <div className=" flex w-[100%] gap-4 items-center pt-8 justify-end">
         <Button variant="light" onPress={onClose}>
           Отмена
         </Button>
