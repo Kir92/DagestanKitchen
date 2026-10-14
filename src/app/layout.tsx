@@ -6,8 +6,8 @@ import { Providers } from "@/providers/provider";
 import { siteConfig } from "@/config/site.config";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth/auth";
+import FallingLeaves from "@/components/effects/falling-leaves";
 
-// Настраиваем шрифты
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,24 +19,22 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Метаданные страницы
 export const metadata: Metadata = {
   title: siteConfig.title,
   description: siteConfig.description,
 };
 
-// Настройка themeColor
 export const generateViewport = () => ({
   themeColor: "#221e1eff",
 });
 
-// Корневой компонент
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth()
+  const session = await auth();
+
   return (
     <html lang="ru">
       <head>
@@ -45,23 +43,25 @@ export default async function RootLayout({
       </head>
       <body
         className={`
-        ${geistSans.variable} 
-        ${geistMono.variable} 
-        antialiased 
-        bg-black
-        text-black-800 
-        min-h-screen 
-        font-sans
-       
-      `}
+          ${geistSans.variable}
+          ${geistMono.variable}
+          antialiased
+          text-stone-100
+          min-h-screen
+          font-sans
+        `}
       >
+        {/* Слой затемнения поверх фона */}
+        <div className="fixed inset-0 bg-black/65 -z-10 pointer-events-none" />
+
+        {/* Анимированная листва */}
+        <FallingLeaves />
+
         <Providers>
           <SessionProvider session={session}>
             <Header />
-            <main className="flex flex-col h-[calc(100vh-${layoutConfig.footerHeight}-${layoutConfig.headerHeight})] w-full justify-start items-center">
-              {children}
-            </main>
-            <footer className="flex h-{`h-[${layoutConfig.footerHeight}]`} justify-center items-center">
+            <main className="w-full">{children}</main>
+            <footer className="py-8 text-center text-sm text-stone-500 border-t border-white/5">
               <p>{siteConfig.description}</p>
             </footer>
           </SessionProvider>

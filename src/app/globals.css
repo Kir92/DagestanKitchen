@@ -19,7 +19,12 @@
 }
 
 body {
-  background: var(--background);
+  background-color: #0a0a0a;
+  background-image: url('/images/dagestan-canyon.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -38,4 +43,31 @@ body {
 .alert-heading {
   font-size: 2.5rem;
   margin-bottom: 10px;
+}
+
+@keyframes leaf-fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(20px) rotate(calc(var(--rotation) / 2));
+  }
+  100% {
+    transform: translateY(110vh) translateX(-20px) rotate(var(--rotation));
+  }
+}
+
+.leaf {
+  top: -10vh;
+  animation-name: leaf-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf {
+    animation: none;
+    display: none;
+  }
 }

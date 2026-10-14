@@ -2,29 +2,43 @@
 import { useState } from "react";
 import { Button, Form, Input } from "@heroui/react";
 import { signInWithCredentials } from "@/actions/sign-in";
+import { useSession } from "next-auth/react";
 
 interface IProps {
   ///////////////////////////////////////////////////////////////////////////////пропс для функции onclose()
   onClose: () => void;
 }
 
+
 const LoginForm = ({ onClose }: IProps) => {
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "", ///////////////////////////////////////////Определяем состояние для параметров ввода данных
     
   });
+  const { update } = useSession();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); ///////////////////////////////////////////////////валидация и отправка формы
-    console.log("Form submitted:", formData);
-    const result = await signInWithCredentials(
-      formData.email,
-      formData.password
-    );
-    console.log("result:", result);
-    onClose(); //////////////////////////////////////////////////////////функция автозакрытия при нажатии зарегистрироваться
-  };
+  e.preventDefault();
+  setErrorMessage(null);
+  console.log("Form submitted:", formData);
+
+  const result = await signInWithCredentials(
+    formData.email,
+    formData.password
+  );
+  console.log("result:", result);
+
+  if (result && typeof result === "object" && "error" in result && result.error) { 
+    setErrorMessage("Неверный email или пароль");
+    return;
+  }
+
+  await update();
+  onClose();
+};
   return (
     <Form className="w-full max-w-xs" onSubmit={handleSubmit}>
       <Input
@@ -62,7 +76,11 @@ const LoginForm = ({ onClose }: IProps) => {
           return null;
         }}
       />
-
+{errorMessage && (
+  <p className="text-danger text-sm w-full text-center">
+    {errorMessage}
+  </p>
+)}
       <div className="flex w-[100%] gap-4 items-center pt-8 justify-end">
         <Button variant="light" onPress={onClose}>
           Отмена

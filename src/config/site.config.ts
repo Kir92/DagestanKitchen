@@ -1,9 +1,10 @@
 export const siteConfig = {
   title: "Дагестанская кухня",
   description: "",
-  navItems : [
-    { href: "/", label: "Рецепты" },
-    { href: "/ingridients", label: "Ингридиенты" },
+  navItems: [
+    { href: "/", label: "Меню" },
+    { href: "/bar", label: "Бар" },
+    { href: "/recipes", label: "Рецепты" },
     { href: "/about", label: "О нас" },
-  ]
+  ],
 };

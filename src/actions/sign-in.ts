@@ -1,4 +1,4 @@
-'use server';
+"use server";
 import { signIn } from "@/auth/auth";
 
 export async function signInWithCredentials(email: string, password: string) {
@@ -10,7 +10,7 @@ export async function signInWithCredentials(email: string, password: string) {
     });
     return result;
   } catch (error) {
-    console.error("ошибка авторизации", error);
-    throw error;
+    console.error("ошибка авторизации:", error);
+    return { error: "CredentialsSignin" };
   }
 }

@@ -1,7 +1,6 @@
 import bcryptjs from "bcryptjs";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
-import { ZodError } from "zod";
 import Credentials from "next-auth/providers/credentials";
 import { signInSchema } from "@/schema/zod";
 import { getUserFromDb } from "@/utils/user";
@@ -30,6 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (!user || !user.password) {
             throw new Error("Неверный ввод данных");
           }
+
           const isPasswordValid = await bcryptjs.compare(
             password,
             user.password
@@ -41,9 +41,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
           return { id: user.id, email: user.email };
         } catch (error) {
-          if (error instanceof ZodError) {
-            return null;
-          }
+          console.error("[authorize error]", error);
           return null;
         }
       },
@@ -60,6 +58,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.id = user.id;
       }
       return token;
+    },
+    async session({ session, token }) {
+      if (token.id && session.user) {
+        session.user.id = token.id as string;
+      }
+      return session;
     },
   },
 });
