@@ -7,7 +7,7 @@ import { getUserFromDb } from "@/utils/user";
 import prisma from "@/utils/prisma";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter((prisma as any),),
   providers: [
     Credentials({
       credentials: {
