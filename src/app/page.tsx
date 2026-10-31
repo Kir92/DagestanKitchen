@@ -225,16 +225,16 @@ const MenuPage = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-6 pb-12 space-y-12">
+    <div className="max-w-6xl mx-auto px-4 pt-8 pb-12 space-y-10 md:space-y-16">
       {/* ========== ЗАГОЛОВОК ========== */}
       <header className="text-center">
-        <p className="text-amber-600 font-semibold tracking-widest uppercase text-sm mb-3">
+        <p className="text-amber-400 font-semibold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3">
           Меню ресторана
         </p>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4">
+        <h1 className="text-3xl md:text-5xl font-bold text-stone-50 tracking-tight mb-3 md:mb-4">
           Дагестанская кухня
         </h1>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+        <p className="text-stone-300 text-sm md:text-lg max-w-2xl mx-auto px-2">
           Аутентичные блюда горного края — от хинкала до премиальных стейков
         </p>
       </header>
@@ -242,18 +242,18 @@ const MenuPage = () => {
       {/* ========== КАТЕГОРИИ ========== */}
       {menu.map((section) => (
         <section key={section.category} className="scroll-mt-24">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 pb-4 border-b-2 border-amber-500 inline-block">
+          <h2 className="text-2xl md:text-4xl font-bold text-stone-50 mb-6 md:mb-10 pb-2 md:pb-4 border-b-2 border-amber-500 inline-block">
             {section.category}
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
             {section.items.map((dish) => (
               <article
                 key={dish.id}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
               >
                 {/* Фото или заглушка */}
-                <div className="h-52 overflow-hidden">
+                <div className="h-44 md:h-52 overflow-hidden">
                   {dish.image ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
@@ -269,40 +269,40 @@ const MenuPage = () => {
                 </div>
 
                 {/* Контент */}
-                <div className="p-5 flex flex-col flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 tracking-tight mb-2">
+                <div className="p-4 md:p-5 flex flex-col flex-1">
+                  <h3 className="text-lg md:text-xl font-bold text-gray-900 tracking-tight mb-1.5 md:mb-2">
                     {dish.name}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-1">
+                  <p className="text-gray-600 text-xs md:text-sm leading-relaxed mb-3 md:mb-4 flex-1">
                     {dish.desc}
                   </p>
 
-                  <div className="flex flex-wrap gap-3 text-gray-500 mb-4 text-xs">
+                  <div className="flex flex-wrap gap-2 md:gap-3 text-gray-500 mb-3 md:mb-4 text-[10px] md:text-xs">
                     {dish.time !== "—" && (
-                      <span className="inline-flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-amber-600" />
+                      <span className="inline-flex items-center gap-1 md:gap-1.5">
+                        <Clock className="w-3 h-3 md:w-3.5 md:h-3.5 text-amber-600" />
                         {dish.time}
                       </span>
                     )}
-                    <span className="inline-flex items-center gap-1.5">
-                      <UtensilsCrossed className="w-3.5 h-3.5 text-amber-600" />
+                    <span className="inline-flex items-center gap-1 md:gap-1.5">
+                      <UtensilsCrossed className="w-3 h-3 md:w-3.5 md:h-3.5 text-amber-600" />
                       {dish.portions}
                     </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <Flame className="w-3.5 h-3.5 text-amber-600" />
+                    <span className="inline-flex items-center gap-1 md:gap-1.5">
+                      <Flame className="w-3 h-3 md:w-3.5 md:h-3.5 text-amber-600" />
                       {dish.kcal}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <span className="text-xl font-bold text-gray-900 font-mono">
+                  <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-gray-100">
+                    <span className="text-lg md:text-xl font-bold text-gray-900 font-mono">
                       {dish.price}
                     </span>
                     <a
                       href="/recipes"
-                      className="inline-flex items-center gap-1.5 text-amber-600 hover:text-amber-700 font-medium text-xs transition-colors"
+                      className="inline-flex items-center gap-1 md:gap-1.5 text-amber-600 hover:text-amber-700 font-medium text-[10px] md:text-xs transition-colors"
                     >
-                      <ChefHat className="w-4 h-4" />
+                      <ChefHat className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Рецепт
                     </a>
                   </div>
@@ -314,8 +314,8 @@ const MenuPage = () => {
       ))}
 
       {/* ========== ПОДВАЛ ========== */}
-      <div className="text-center pt-8 border-t border-white/10">
-        <p className="text-stone-100">
+      <div className="text-center pt-6 md:pt-8 border-t border-white/10">
+        <p className="text-stone-200 text-sm md:text-base px-4">
           Хотите приготовить дома? Загляните в{" "}
           <a
             href="/recipes"
